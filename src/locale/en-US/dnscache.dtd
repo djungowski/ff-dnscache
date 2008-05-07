@@ -1,0 +1,3 @@
+<!ENTITY dnscache.label "DNS Cache">
+<!ENTITY dnscacheToolbar.label "DNS Cache">
+<!ENTITY dnscacheToolbar.tooltip "Enable / Disable DNS Cache">

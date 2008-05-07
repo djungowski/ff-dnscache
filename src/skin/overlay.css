@@ -1,0 +1,19 @@
+#dnscache-toolbar-button
+{
+  list-style-image: url("chrome://dnscache/skin/toolbar-button.png");
+  -moz-image-region: rect(0px 24px 24px 0px);
+}
+[iconsize="small"] #dnscache-toolbar-button
+{
+  -moz-image-region: rect( 0px 40px 16px 24px);
+}
+
+#dnscache-toolbar-button.inactive
+{
+  list-style-image: url("chrome://dnscache/skin/toolbar-button.png");
+  -moz-image-region: rect(24px 24px 48px  0px);
+}
+[iconsize="small"] #dnscache-toolbar-button.inactive
+{
+  -moz-image-region: rect(24px 40px 40px 24px);
+}

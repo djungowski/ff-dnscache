@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://dnscache/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://dnscache/locale/dnscache.dtd">
+<overlay id="dnscache-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="overlay.js"/>
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="dnscache-strings" src="chrome://dnscache/locale/dnscache.properties"/>
+  </stringbundleset>
+
+  <toolbarpalette id="BrowserToolbarPalette">
+  <toolbarbutton id="dnscache-toolbar-button"
+    label="&dnscacheToolbar.label;"
+    tooltiptext="&dnscacheToolbar.tooltip;"
+    oncommand="dnscache.onToolbarButtonCommand()"
+	class=""/>
+  </toolbarpalette>
+</overlay>
