@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>dnscache@dominik.jungowski</em:id>
     <em:name>DNS Cache</em:name>
-    <em:version>1.0</em:version>
+    <em:version>1.1</em:version>
     <em:creator>Dominik Jungowski</em:creator>
     <em:description>Allows you to deactive and activate the DNS Cache of Firefox</em:description>
     <em:homepageURL>http://www.dj-nge.de</em:homepageURL>
