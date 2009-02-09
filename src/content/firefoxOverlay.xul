@@ -15,4 +15,12 @@
     oncommand="dnscache.onToolbarButtonCommand()"
 	class=""/>
   </toolbarpalette>
+  <!-- Extend Firefox status bar -->
+  <statusbar id="status-bar">
+    <statusbarpanel id="dnsCacheStatusBar" context="dnsCacheStatusContextMenu"
+                    onclick="dnscache.onToolbarButtonCommand()">
+        <image id="dnsCacheStatusIcon" tooltiptext="&dnscacheToolbar.tooltip;"/>
+        <label id="dnsCacheStatusText" onclick="dnscache.onToolbarButtonCommand()"/>
+    </statusbarpanel>
+  </statusbar>
 </overlay>

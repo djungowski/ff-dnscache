@@ -52,20 +52,25 @@ var dnscache = {
     if (typeof state == 'undefined') {
 		state = this.isDnsActive();
 	}
-	var button = document.getElementById("dnscache-toolbar-button")
-  	switch(state) {
-		// DNS Cache is not active
-		case false:
-			button.setAttribute("class", "inactive");
-			button.setAttribute("tooltiptext", this.strings.getString("dnsInactive"));
-		break;
+        var buttons = new Array();
+	buttons.push(document.getElementById("dnscache-toolbar-button"));
+        buttons.push(document.getElementById("dnsCacheStatusIcon"));
+        for (var i = 0; i < buttons.length; i++) {
+            var button = buttons[i];
+            switch(state) {
+                    // DNS Cache is not active
+                    case false:
+                            button.setAttribute("class", "inactive");
+                            button.setAttribute("tooltiptext", this.strings.getString("dnsInactive"));
+                    break;
 
-		// DNS Cache is active
-		case true:
-			button.setAttribute("class", "");
-			button.setAttribute("tooltiptext", this.strings.getString("dnsActive"));
-		break;
-	}
+                    // DNS Cache is active
+                    case true:
+                            button.setAttribute("class", "");
+                            button.setAttribute("tooltiptext", this.strings.getString("dnsActive"));
+                    break;
+            }
+        }
   }
 };
 window.addEventListener("load", function(e) { dnscache.onLoad(e); }, false);

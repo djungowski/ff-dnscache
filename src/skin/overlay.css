@@ -17,3 +17,11 @@
 {
   -moz-image-region: rect(24px 40px 40px 24px);
 }
+
+#dnsCacheStatusIcon {
+    list-style-image: url(chrome://dnscache/skin/cog.png);
+}
+
+#dnsCacheStatusIcon.inactive {
+    list-style-image: url(chrome://dnscache/skin/cog_error.png);
+}
