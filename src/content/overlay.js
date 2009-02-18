@@ -50,13 +50,16 @@ var dnscache = {
   },
   changeButtonState: function(state) {
     if (typeof state == 'undefined') {
-		state = this.isDnsActive();
+            state = this.isDnsActive();
 	}
         var buttons = new Array();
-	buttons.push(document.getElementById("dnscache-toolbar-button"));
+        buttons.push(document.getElementById("dnscache-toolbar-button"));
         buttons.push(document.getElementById("dnsCacheStatusIcon"));
         for (var i = 0; i < buttons.length; i++) {
             var button = buttons[i];
+            if (button === null) {
+                continue;
+            }
             switch(state) {
                     // DNS Cache is not active
                     case false:
