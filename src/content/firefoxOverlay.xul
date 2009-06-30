@@ -17,11 +17,15 @@
   </toolbarpalette>
   <!-- Extend Firefox status bar -->
   <statusbar id="status-bar">
+    <menupopup id="dnscache-menu">
+        <menuitem id="dnscache-toggle" label="&dnscacheToolbar.tooltip;" oncommand="openDialog('chrome://firestatus/content/statusInput.xul', 'statusInput', 'chrome,resizable=yes');"/>
+        <menuitem id="dnscache-flush" label="&dnscacheToolbar.flush;" oncommand="openDialog('chrome://firestatus/content/options.xul', 'prefs', 'chrome,resizable=yes');"/>
+    </menupopup>
     <statusbarpanel id="dnsCacheStatusBar" context="dnsCacheStatusContextMenu"
                     onclick="dnscache.onToolbarButtonCommand()"
-                    onrightclick="onclick="dnscache.flushDns()">
+                    context="dnscache-menu">
         <image id="dnsCacheStatusIcon" tooltiptext="&dnscacheToolbar.tooltip;"/>
-        <label id="dnsCacheStatusText" onclick="dnscache.onToolbarButtonCommand()" onrightclick="onclick="dnscache.flushDns()" />
+        <label id="dnsCacheStatusText" onclick="dnscache.onToolbarButtonCommand()" />
     </statusbarpanel>
   </statusbar>
 </overlay>
