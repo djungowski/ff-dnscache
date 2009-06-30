@@ -39,6 +39,10 @@ var dnscache = {
 
 		// DNS Cache is active and shall be deactivated
 		case true:
+            // First off: Flush the cache
+            var cacheService = Components.classes["@mozilla.org/network/cache-service;1"].getService(Components.interfaces.nsICacheService);
+            cacheService.evictEntries(Components.interfaces.nsICache.STORE_ANYWHERE);
+
 			this.prefs.setIntPref("network.dnsCacheExpiration", "0");
 			this.prefs.setIntPref("network.dnsCacheEntries", "0");
 			this.changeButtonState(false);
