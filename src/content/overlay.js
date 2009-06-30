@@ -40,8 +40,15 @@ var dnscache = {
 		// DNS Cache is active and shall be deactivated
 		case true:
             // First off: Flush the cache
+            //Service IO
+            var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+            //Set offline
+            ioService.offline = true;
+            //Get Cache Service
             var cacheService = Components.classes["@mozilla.org/network/cache-service;1"].getService(Components.interfaces.nsICacheService);
             cacheService.evictEntries(Components.interfaces.nsICache.STORE_ANYWHERE);
+            //Set online
+            ioService.offline = false;
 
 			this.prefs.setIntPref("network.dnsCacheExpiration", "0");
 			this.prefs.setIntPref("network.dnsCacheEntries", "0");
