@@ -18,9 +18,10 @@
   <!-- Extend Firefox status bar -->
   <statusbar id="status-bar">
     <statusbarpanel id="dnsCacheStatusBar" context="dnsCacheStatusContextMenu"
-                    onclick="dnscache.onToolbarButtonCommand()">
+                    onclick="dnscache.onToolbarButtonCommand()"
+                    onrightclick="onclick="dnscache.flushDns()">
         <image id="dnsCacheStatusIcon" tooltiptext="&dnscacheToolbar.tooltip;"/>
-        <label id="dnsCacheStatusText" onclick="dnscache.onToolbarButtonCommand()"/>
+        <label id="dnsCacheStatusText" onclick="dnscache.onToolbarButtonCommand()" onrightclick="onclick="dnscache.flushDns()" />
     </statusbarpanel>
   </statusbar>
 </overlay>
