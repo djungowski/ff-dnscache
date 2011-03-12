@@ -12,6 +12,12 @@ var dnscache = {
 	this.getDnsCacheValues();
 	this.changeButtonState();
   },
+  onReload: function(e) {
+	// If user is (re)loading a document and DNS caching is not active, flush the dns cache
+	if (e.originalTarget instanceof HTMLDocument && !this.isDnsActive()) {
+      this.flushDns();
+	}
+  },
   onToolbarButtonCommand: function(e) {
 	this.getDnsCacheValues();
 	this.changeDnsState();
@@ -22,7 +28,7 @@ var dnscache = {
 	this.entries = this.prefs.getIntPref("network.dnsCacheEntries");
   },
   isDnsActive: function() {
- 	return (this.expiration > 0 && this.expiration > 0);
+ 	return (this.expiration > 0 && this.entries > 0);
   },
   flushDns: function() {
     var networkIoService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
@@ -86,4 +92,6 @@ var dnscache = {
         }
   }
 };
+
 window.addEventListener("load", function(e) { dnscache.onLoad(e); }, false);
+gBrowser.addEventListener("load", function(e) { dnscache.onReload(e); }, true);
