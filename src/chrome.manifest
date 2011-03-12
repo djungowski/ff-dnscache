@@ -1,5 +1,6 @@
 content	dnscache	content/
 locale	dnscache	en-US	locale/en-US/
 skin	dnscache	classic/1.0	skin/
-overlay	chrome://browser/content/browser.xul	chrome://dnscache/content/firefoxOverlay.xul
+overlay	chrome://browser/content/browser.xul	chrome://dnscache/content/firefoxOverlay.xul appversion<4.0
+overlay	chrome://browser/content/browser.xul	chrome://dnscache/content/firefoxOverlay4.xul appversion>=4.0
 style	chrome://global/content/customizeToolbar.xul	chrome://dnscache/skin/overlay.css

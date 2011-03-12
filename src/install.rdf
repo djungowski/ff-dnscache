@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>dnscache@dominik.jungowski</em:id>
     <em:name>DNS Cache</em:name>
-    <em:version>1.6</em:version>
+    <em:version>1.7</em:version>
     <em:creator>Dominik Jungowski</em:creator>
     <em:description>Allows you to deactive and activate the DNS Cache of Firefox</em:description>
     <em:homepageURL>http://www.phpdevblog.net</em:homepageURL>
@@ -13,7 +13,7 @@
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
         <em:minVersion>1.5</em:minVersion>
-        <em:maxVersion>3.6.*</em:maxVersion>
+        <em:maxVersion>4.0.*</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>
