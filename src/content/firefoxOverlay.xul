@@ -12,17 +12,17 @@
   <toolbarbutton id="dnscache-toolbar-button"
     label="&dnscacheToolbar.label;"
     tooltiptext="&dnscacheToolbar.tooltip;"
-    oncommand="dnscache.onToolbarButtonCommand()"
+    oncommand="DNSCacheAddon.onToolbarButtonCommand()"
 	class=""/>
   </toolbarpalette>
   <!-- Extend Firefox status bar -->
   <statusbar id="status-bar">
     <menupopup id="dnscache-menu">
-        <menuitem id="dnscache-toggle" label="&dnscacheToolbar.tooltip;" oncommand="dnscache.onToolbarButtonCommand();"/>
-        <menuitem id="dnscache-flush" label="&dnscacheToolbar.flush;" oncommand="dnscache.flushDns();"/>
+        <menuitem id="dnscache-toggle" label="&dnscacheToolbar.tooltip;" oncommand="DNSCacheAddon.onToolbarButtonCommand();"/>
+        <menuitem id="dnscache-flush" label="&dnscacheToolbar.flush;" oncommand="DNSCacheAddon.flushDns();"/>
     </menupopup>
     <statusbarpanel id="dnsCacheStatusBar" context="dnscache-menu"
-                    ondblclick="dnscache.onToolbarButtonCommand();">
+                    ondblclick="DNSCacheAddon.onToolbarButtonCommand();">
         <image id="dnsCacheStatusIcon" tooltiptext="&dnscacheToolbar.tooltip;"/>
         <label id="dnsCacheStatusText" />
     </statusbarpanel>

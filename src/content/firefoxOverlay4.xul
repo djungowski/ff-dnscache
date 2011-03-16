@@ -10,8 +10,8 @@
 
   <popupset>
     <menupopup id="dnscache-menu">
-	  <menuitem id="dnscache-toggle" label="&dnscacheToolbar.tooltip;" oncommand="dnscache.onToolbarButtonCommand();"/>
-	  <menuitem id="dnscache-flush" label="&dnscacheToolbar.flush;" oncommand="dnscache.flushDns();"/>
+	  <menuitem id="dnscache-toggle" label="&dnscacheToolbar.tooltip;" oncommand="DNSCacheAddon.onToolbarButtonCommand();"/>
+	  <menuitem id="dnscache-flush" label="&dnscacheToolbar.flush;" oncommand="DNSCacheAddon.flushDns();"/>
     </menupopup>
   </popupset>
 
@@ -19,14 +19,14 @@
   <toolbarbutton id="dnscache-toolbar-button"
     label="&dnscacheToolbar.label;"
     tooltiptext="&dnscacheToolbar.tooltip;"
-    oncommand="dnscache.onToolbarButtonCommand();"
+    oncommand="DNSCacheAddon.onToolbarButtonCommand();"
     context="dnscache-menu"
 	class=""/>
 	
 	<toolbarbutton class="toolbarbutton-1 chromeclass-toolbar-additional"
   				   id="dnsCacheStatusBar"
   				   context="dnscache-menu"
-  				   ondblclick="dnscache.onToolbarButtonCommand();"
+  				   ondblclick="DNSCacheAddon.onToolbarButtonCommand();"
   				   label="&dnscacheToolbar.label;"
   				   tooltiptext="&dnscacheToolbar.tooltip;">
 		<image id="dnsCacheStatusIcon" tooltiptext="&dnscacheToolbar.tooltip;"/>

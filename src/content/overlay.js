@@ -1,90 +1,4 @@
-/**
- * Event Listener to listen to browser's load events
- * Implements nsISupportsWeakReference
- * 
- * Parts of this object's code are taken from
- * https://developer.mozilla.org/en/XUL_School/Intercepting_Page_Loads
- * 
- */
-var eventListener = {
-  QueryInterface: function(aIID) {
-    if (aIID.equals(Components.interfaces.nsISupportsWeakReference)
-        || aIID.equals(Components.interfaces.nsISupports)) {
-      return this;
-    }
-
-    throw Components.results.NS_NOINTERFACE;
-  },
-  /**
-   * Adds progressListener to every current tab
-   * and also registers progressListener for every new tab
-   * that is opened afterwards
-   * 
-   */
-  init: function() {
-    gBrowser.browsers.forEach(function(browser) {
-      this._toggleProgressListener(browser.webProgress, true);
-    }, this);
-
-    gBrowser.tabContainer.addEventListener("TabOpen", this, false);
-    gBrowser.tabContainer.addEventListener("TabClose", this, false);
-  },
-  /**
-   * Register progressListener for newly opened tabs
-   * 
-   * @param aEvent
-   */
-  handleEvent: function(event) {
-    var tab = event.target;
-    var webProgress = gBrowser.getBrowserForTab(tab).webProgress;
-
-    this._toggleProgressListener(webProgress, ("TabOpen" == event.type));
-  },
-  /**
-   * Listen to Firefox' state changes
-   * Concretely: Flush DNS cache if user is reloading a current page,
-   * be it in a normal browser frame or an iframe
-   * 
-   * @param webProgress
-   * @param request
-   * @param stateFlags
-   * @param status
-   */
-  onStateChange: function(webProgress, request, stateFlags, status) {
-    // If dns cache is active, there's nothing we need to do here
-    if (dnscache.isDnsActive()) {
-      return;
-    }
-    // If request is started and request is a document
-    if ((stateFlags & Components.interfaces.nsIWebProgressListener.STATE_START) &&
-        (stateFlags & Components.interfaces.nsIWebProgressListener.STATE_IS_DOCUMENT)) {
-      // Only trigger if user is reloading page
-      if (window.content.location.href == request.name) {
-        dnscache.flushDns();
-      }
-    }
-  },
-  // Empty methods, need to be implemented because of nsISupportsWeakReference
-  onLocationChange: function() {},
-  onProgressChange: function() {},
-  onSecurityChange: function() {},
-  onStatusChange: function() {},
-  /**
-   * Add or remove progressListener to tab
-   * 
-   * @param aWebProgress
-   * @param aIsAdd
-   */
-  _toggleProgressListener: function(webProgress, isAdd) {
-    if (isAdd) {
-      webProgress.addProgressListener(this, webProgress.NOTIFY_STATE_ALL);
-    } else {
-      webProgress.removeProgressListener(this);
-    }
-  }
-};
-
-var dnscache = {
+var DNSCacheAddon = {
   expiration: -1,
   entries: -1,
   onLoad: function() {
@@ -97,7 +11,7 @@ var dnscache = {
         .getService(Components.interfaces.nsIPrefBranch);
     this.getDnsCacheValues();
     this.changeButtonState();
-    eventListener.init();
+    this.eventListener.init();
   },
   onToolbarButtonCommand: function(e) {
     this.getDnsCacheValues();
@@ -159,7 +73,7 @@ var dnscache = {
     if (typeof state == 'undefined') {
       state = this.isDnsActive();
     }
-    var buttons = new Array();
+    var buttons = [];
     buttons.push(document.getElementById("dnscache-toolbar-button"));
     buttons.push(document.getElementById("dnsCacheStatusIcon"));
     for ( var i = 0; i < buttons.length; i++) {
@@ -185,6 +99,91 @@ var dnscache = {
   }
 };
 
+/**
+ * Event Listener to listen to browser's load events
+ * Implements nsISupportsWeakReference
+ * 
+ * Parts of this object's code are taken from
+ * https://developer.mozilla.org/en/XUL_School/Intercepting_Page_Loads
+ * 
+ */
+DNSCacheAddon.eventListener = {
+  QueryInterface: function(aIID) {
+    if (aIID.equals(Components.interfaces.nsISupportsWeakReference) || aIID.equals(Components.interfaces.nsISupports)) {
+      return this;
+    }
+
+    throw Components.results.NS_NOINTERFACE;
+  },
+  /**
+   * Adds progressListener to every current tab
+   * and also registers progressListener for every new tab
+   * that is opened afterwards
+   * 
+   */
+  init: function() {
+    gBrowser.browsers.forEach(function(browser) {
+      this._toggleProgressListener(browser.webProgress, true);
+    }, this);
+
+    gBrowser.tabContainer.addEventListener("TabOpen", this, false);
+    gBrowser.tabContainer.addEventListener("TabClose", this, false);
+  },
+  /**
+   * Register progressListener for newly opened tabs
+   * 
+   * @param aEvent
+   */
+  handleEvent: function(event) {
+    var tab = event.target;
+    var webProgress = gBrowser.getBrowserForTab(tab).webProgress;
+
+    this._toggleProgressListener(webProgress, ("TabOpen" == event.type));
+  },
+  /**
+   * Listen to Firefox' state changes
+   * Concretely: Flush DNS cache if user is reloading a current page,
+   * be it in a normal browser frame or an iframe
+   * 
+   * @param webProgress
+   * @param request
+   * @param stateFlags
+   * @param status
+   */
+  onStateChange: function(webProgress, request, stateFlags, status) {
+    // If dns cache is active, there's nothing we need to do here
+    if (DNSCacheAddon.isDnsActive()) {
+      return;
+    }
+    // If request is started and request is a document
+    if ((stateFlags & Components.interfaces.nsIWebProgressListener.STATE_START) &&
+        (stateFlags & Components.interfaces.nsIWebProgressListener.STATE_IS_DOCUMENT)) {
+      // Only trigger if user is reloading page
+      if (window.content.location.href == request.name) {
+        DNSCacheAddon.flushDns();
+      }
+    }
+  },
+  // Empty methods, need to be implemented because of nsISupportsWeakReference
+  onLocationChange: function() {},
+  onProgressChange: function() {},
+  onSecurityChange: function() {},
+  onStatusChange: function() {},
+  /**
+   * Add or remove progressListener to tab
+   * 
+   * @param aWebProgress
+   * @param aIsAdd
+   */
+  _toggleProgressListener: function(webProgress, isAdd) {
+    if (isAdd) {
+      webProgress.addProgressListener(this, webProgress.NOTIFY_STATE_ALL);
+    } else {
+      webProgress.removeProgressListener(this);
+    }
+  }
+};
+
 window.addEventListener("load", function(e) {
-  dnscache.onLoad(e);
+  DNSCacheAddon.onLoad(e);
 }, false);
