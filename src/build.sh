@@ -110,7 +110,7 @@ fi
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."
-zip -r -x@exclude.lst ../$APP_NAME.xpi *
+zip -r -x@exclude.lst ../bin/$APP_NAME.xpi *
 
 cd "$ROOT_DIR"
 
