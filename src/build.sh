@@ -80,6 +80,7 @@ echo "Copying various files to $TMP_DIR folder..."
 for DIR in $ROOT_DIRS; do
   mkdir $TMP_DIR/$DIR
   FILES="`find $DIR -path '*CVS*' -prune -o -type f -print | grep -v \~`"
+  echo $FILES
   echo $FILES >> files
   cp --verbose --parents $FILES $TMP_DIR
 done
@@ -109,7 +110,7 @@ fi
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."
-zip -r ../$APP_NAME.xpi *
+zip -r -x@exclude.lst ../$APP_NAME.xpi *
 
 cd "$ROOT_DIR"
 
