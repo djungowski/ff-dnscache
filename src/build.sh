@@ -86,7 +86,7 @@ for DIR in $ROOT_DIRS; do
 done
 
 # Copy other files to the root of future XPI.
-for ROOT_FILE in $ROOT_FILES install.rdf chrome.manifest; do
+for ROOT_FILE in $ROOT_FILES install.rdf chrome.manifest exclude.lst; do
   cp --verbose $ROOT_FILE $TMP_DIR
   if [ -f $ROOT_FILE ]; then
     echo $ROOT_FILE >> files
@@ -110,7 +110,7 @@ fi
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."
-zip -r -x@exclude.lst ../bin/$APP_NAME.xpi *
+zip -r x@exclude.lst ../../bin/$APP_NAME.xpi *
 
 cd "$ROOT_DIR"
 
