@@ -1,3 +1,3 @@
-__DNS Cache Plugin for Firefox__
+!DNS Cache Plugin for Firefox
 
 Latest supported Firefox Version: 8.*
